@@ -1,7 +1,6 @@
 {
-  "name": "datingapp",
+  "name": "nssdatingappc8",
   "version": "1.0.0",
-  "description": "",
   "main": "public/index.html",
     "scripts": {
     "karma": "./node_modules/karma/bin/karma start",
