@@ -9,7 +9,53 @@
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-
+    <div>
+      <form id="loginform" action="#">
+        <input type="email" value="email" placeholder="bob@gmail.com"></input>
+        <input type="password" value="password" placeholder="$Gfn36"></input>
+        <button type="button" id="loginbutton" value="login">Login</button>
+        <button type="button" id="registerbutton" value="register">New? Input Info and Click Here</button>
+      </form>
+    </div>
+    <div id="createprofile" class="hidden">
+      <h3>Create Your Profile</h3>
+        <div class="row">
+          <div class="large-12 columns">
+            <form id="newprofileform">
+              <h5>Profile Name:</h5>
+              <input type="text" placeholder="Bob Smith"></input><br>
+              <h5>Gender:</h5>
+              <input type="text" placeholder="Male or Female"></input><br>
+              <h5>Email:</h5>
+              <input type="email" placeholder="bobsmith@gmail.com"></input><br>
+              <h5>Description:</h5>
+              <input type="text" placeholder="Make it unique...."></input><br>
+              <button type="button" id="createbutton">Create Profile</button>
+            </form>
+          </div>
+        </div>
+    </div>
+    <div id="profileapp" class="hidden">
+      <h3>Profile</h3>
+      <div class="row">
+        <div class="large-4 columns">
+          <div id="imagecontainer">
+            <img src=""></img>
+          </div>
+        </div>
+        <div class="large-8 columns">
+          <table>
+            <h5>Profile Name:</h5>
+            <tr id="profilename"></tr>
+            <h5>Profile Gender:</h5>
+            <tr id="profilegender"></tr>
+            <h5>Profile Email:</h5>
+            <tr id="profileemail"></tr>
+            <h5>Profile Description:</h5>
+            <tr id="profiledescription"></tr>
+          </table>
+        </div>
+    </div>
     <script src="vendor/firebase.js"></script>
     <script src="vendor/jquery.min.js"></script>
     <script src="js/main.js"></script>
