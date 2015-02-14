@@ -6,23 +6,10 @@
   var emaillogin    = $loginform.find('[type="email"]').val();
   var pass       = $loginform.find('[type="password"]').val();
   var url = 'https://datingappnssc8.firebaseio.com/';
-  var ref = new Firebase(url);
-console.log(ref);
   //////for some reason not allowing me to create a Constructor object
   //with var ref = new Firebase(url); it says that Firebase is undefined
-
-
 $('#loginform').on('click', '#loginbutton', function (evt){
   evt.preventDefault();
-
-  ref.on("value", function(snapshot) {
-  console.log(snapshot.val());
-}, function (errorObject) {
-  console.log("The read failed: " + errorObject.code);
-
-
-});
-
 ///this will be used to retrieve all of the likes or available profiles, when retrieving a list of items in Firebase.
 // child_added is triggered once for each existing child and then again every time a new child is added to the specified path.
 // The event callback is passed a snapshot containing the new child's data.
@@ -52,8 +39,7 @@ $('#loginform').on('click', '#registerbutton', function (event){
   $('#loginform').toggleClass('hidden');
 /////new profile form will appear
   $('#createprofile').toggleClass('hidden');
-  $('#mainpageapp').toggleClass('hidden');
-})
+  })
 
 
 $('#newprofileform').on('click', '#createbutton', function (event){
@@ -74,9 +60,8 @@ $.post(jsonurl, profiles, function(res){
       $npphoto.attr('profiles-uuid', res.profile)
       $tbody.attr('profiles-uuid', res.profile);
       })
-  $('#newprofileform').toggleClass('hidden');
-  $('#profileapp').toggleClass('hidden');
-
+  $('#createprofile').toggleClass('hidden');
+  $('#mainpageapp').toggleClass('hidden');
 })
 
 
@@ -96,7 +81,9 @@ function addProfileToTable (uuid, info){
       $('#profiledescr').append($profiledescr);
 }
 
-////////////////////These are the main page click handlers
+
+
+////////////////////These are the click handlers used for navigation
 //
 $('#mainpageapp').on('click', '#profileappbutton', function(event){
   event.preventDefault();
