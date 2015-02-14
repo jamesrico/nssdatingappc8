@@ -23,33 +23,29 @@ $('#loginform').on('click', '#registerbutton', function (event){
 })
 
 
-$('#newprofileform').on('click', '#createbutton', function createProfile(event){
+$('#newprofileform').on('click', '#createbutton', function (event){
 ///////post this info to firebase
 
-$.post(jsonurl, profiles, function(res){
-      $npphoto.attr('profiles-uuid', res.profile)
-      $tbody.attr('profiles-uuid', res.profile);
-      })
 
-  $('#createprofile')toggleClass('hidden');
-  $('#profileapp').toggleClass('hidden');
-})
-
-function createProfile (){
-    var $tbody = $('<tbody></tbody>')
+ var $tbody = $('<tbody></tbody>'),
       photo = $('#infophoto').val(),
       name  = $('#infoname').val(),
       gender = $('#infogender').val(),
       email = $('#infoemail').val(),
       descr = $('#infodescription').val(),
-      $npphoto = $('<img src='+photo+'></img>'),
-      $npname = $('<td>'+name+'<td>'),
-      $npgender = $('<td>'+gender+'<td>'),
-      $npemail = $('<td>'+email+'<td>'),
-      $npdescr =$('<td>'+descr+'<td>'),
-      jsonurl = 'https://datingappnssc8.firebaseio.com/.json';
-      profiles = JSON.stringify({photourl: photo, name: name, gender: gender, email: email, description: descr});
-}
+      jsonurl = 'https://datingappnssc8.firebaseio.com/.json',
+      data = {photourl: photo, name: name, gender: gender, email: email, description: descr},
+      profiles = JSON.stringify(data);
+
+$.post(jsonurl, profiles, function(res){
+      $npphoto.attr('profiles-uuid', res.profile)
+      $tbody.attr('profiles-uuid', res.profile);
+      })
+  $('#newprofileform').toggleClass('hidden');
+  $('#profileapp').toggleClass('hidden');
+
+})
+
 
 function addProfileToTable (uuid, info){
   var $profilephoto = $('<img src='+info.photourl+'></img>'),
