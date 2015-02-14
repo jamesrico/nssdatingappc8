@@ -2,7 +2,7 @@
   "name": "nssdatingappc8",
   "version": "1.0.0",
   "main": "public/index.html",
-    "scripts": {
+  "scripts": {
     "karma": "./node_modules/karma/bin/karma start",
     "test": "npm run karma",
     "test-once": "npm run karma -- --single-run",
@@ -38,8 +38,8 @@
     "node-sass": "^2.0.0-beta",
     "phantomjs": "^1.9.15"
   },
-  "browserify" : {
-    "transform" : [
+  "browserify": {
+    "transform": [
       "browserify-shim"
     ]
   },
@@ -47,5 +47,8 @@
     "jquery": "global:$",
     "lodash": "global:_",
     "firebase": "global:Firebase"
+  },
+  "dependencies": {
+    "firebase": "^2.2.0"
   }
 }

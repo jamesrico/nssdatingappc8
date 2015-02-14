@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dating App</title>
-    <link rel="stylesheet" href="">
+    <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
     <div>
       <form id="loginform" action="#">
-        <input type="email" value="email" placeholder="bob@gmail.com"></input>
-        <input type="password" value="password" placeholder="$Gfn36"></input>
+        <input type="email" placeholder="bob@gmail.com"></input>
+        <input type="password" placeholder="$Gfn36"></input>
         <button type="button" id="loginbutton" value="login">Login</button>
-        <button type="button" id="registerbutton" value="register">New? Input Info and Click Here</button>
+        <button type="submit" id="registerbutton" value="register">New? Input Info and Click Here</button>
       </form>
     </div>
     <div id="createprofile" class="hidden">
@@ -22,14 +22,16 @@
         <div class="row">
           <div class="large-12 columns">
             <form id="newprofileform">
+              <h5>Photo Url:</h5>
+              <input id="infophoto" type="url"></input><br>
               <h5>Profile Name:</h5>
-              <input type="text" placeholder="Bob Smith"></input><br>
+              <input id="infoname" type="text" placeholder="Bob Smith"></input><br>
               <h5>Gender:</h5>
-              <input type="text" placeholder="Male or Female"></input><br>
+              <input id="infogender" type="text" placeholder="Male or Female"></input><br>
               <h5>Email:</h5>
-              <input type="email" placeholder="bobsmith@gmail.com"></input><br>
+              <input id="infoemail" type="email" placeholder="bobsmith@gmail.com"></input><br>
               <h5>Description:</h5>
-              <input type="text" placeholder="Make it unique...."></input><br>
+              <input id="infodescription" type="text" placeholder="Make it unique...."></input><br>
               <button type="button" id="createbutton">Create Profile</button>
             </form>
           </div>
@@ -40,19 +42,20 @@
       <div class="row">
         <div class="large-4 columns">
           <div id="imagecontainer">
-            <img src=""></img>
           </div>
         </div>
         <div class="large-8 columns">
-          <table>
-            <h5>Profile Name:</h5>
-            <tr id="profilename"></tr>
-            <h5>Profile Gender:</h5>
-            <tr id="profilegender"></tr>
-            <h5>Profile Email:</h5>
-            <tr id="profileemail"></tr>
-            <h5>Profile Description:</h5>
-            <tr id="profiledescription"></tr>
+          <table id="profileTable">
+            <tbody>
+              <h5>Profile Name:</h5>
+              <tr id="profilename"></tr>
+              <h5>Profile Gender:</h5>
+              <tr id="profilegender"></tr>
+              <h5>Profile Email:</h5>
+              <tr id="profileemail"></tr>
+              <h5>Profile Description:</h5>
+              <tr id="profiledescr"></tr>
+            </tbody>
           </table>
         </div>
     </div>
