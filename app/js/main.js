@@ -122,4 +122,42 @@ $('#mainpageapp').on('click', '#potentialappbutton', function(event){
   $('#mainpageapp').toggleClass('hidden');
 })
 
+$('#profileapp').on('click', '#currentappbutton', function (event){
+  event.preventDefault;
+  $('#currentapp').toggleClass('hidden');
+  $('#profileapp').toggleClass('hidden');
+})
+
+$('#profileapp').on('click', '#potentialappbutton', function (event){
+  event.preventDefault;
+  $('#profileapp').toggleClass('hidden');
+  $('#potentialapp').toggleClass('hidden');
+})
+
+$('#currentapp').on('click', '#potentialappbutton', function (event){
+  event.preventDefault;
+  $('#currentapp').toggleClass('hidden');
+  $('#potentialapp').toggleClass('hidden');
+})
+
+$('#currentapp').on('click', '#profileappbutton', function (event){
+  event.preventDefault;
+  $('#currentapp').toggleClass('hidden');
+  $('#profileapp').toggleClass('hidden');
+})
+
+$('#potentialapp').on('click', '#currentappbutton', function (event){
+  event.preventDefault;
+  $('#currentapp').toggleClass('hidden');
+  $('#potentialapp').toggleClass('hidden');
+})
+
+$('#potentialapp').on('click', '#profileappbutton', function (event){
+  event.preventDefault;
+  $('#profileapp').toggleClass('hidden');
+  $('#potentialapp').toggleClass('hidden');
+})
+
+
+
 
