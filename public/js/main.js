@@ -96,3 +96,30 @@ function addProfileToTable (uuid, info){
       $('#profiledescr').append($profiledescr);
 }
 
+////////////////////These are the main page click handlers
+//
+$('#mainpageapp').on('click', '#profileappbutton', function(event){
+  event.preventDefault();
+
+  $('#profileapp').toggleClass('hidden');
+
+  $('#mainpageapp').toggleClass('hidden');
+})
+
+$('#mainpageapp').on('click', '#currentappbutton', function(event){
+  event.preventDefault();
+
+  $('#currentapp').toggleClass('hidden');
+
+  $('#mainpageapp').toggleClass('hidden');
+})
+
+$('#mainpageapp').on('click', '#potentialappbutton', function(event){
+  event.preventDefault();
+
+  $('#potentialapp').toggleClass('hidden');
+
+  $('#mainpageapp').toggleClass('hidden');
+})
+
+
