@@ -7,6 +7,22 @@
 
   //////for some reason not allowing me to create a Constructor object
   //with var ref = new Firebase(url); it says that Firebase is undefined
+$('#loginform').submit(function(event){
+  var $loginForm = $(event.target),
+      email      = $loginForm.find('[type="email"]').val(),
+      pass       = $loginForm.find('[type="password"]').val(),
+      data       = {email: email, password: pass};
+
+  event.preventDefault();
+
+  ref.authWithPassword(data, function(err, auth) {
+     if (err) {
+      $('.error').text(err);
+    } else {
+      location.reload(true);
+    }
+  });
+});
 
 ////this will log the user in
   $('#loginform').on('click', '#loginbutton', function (evt){
@@ -14,19 +30,21 @@
   var unemail = $('#unemail').val();
   var unpass  = $('#unpass').val();
 
-
-  ref.authWithPassword({
-  email: unemail,
-  password: unpass
-}, function(error, authData) {
-  if (error) {
-    console.log("Login Failed!", error);
-  } else {
-    console.log("Authenticated successfully with payload:", authData);
-  }
-});
-
-
+function loginUser(obj, cb) {
+  ref.createUser(obj, function(err) {
+    if (!err) {
+      ref.authWithPassword(obj, function (err, auth){
+        if (!err) {
+          cb(null, auth);
+        } else {
+          cb(err);
+        }
+      });
+    } else {
+      cb(err);
+    }
+  });
+}
  $('#loginform').toggleClass('hidden');
  $('#mainpageapp').toggleClass('hidden');
 })
@@ -38,17 +56,21 @@ $('#loginform').on('click', '#registerbutton', function (event){
   var unemail = $('#unemail').val();
   var unpass  = $('#unpass').val();
 /////this will create the user
-ref.createUser({
-  email    : unemail,
-  password : unpass
-}, function(error, userData) {
-  if (error) {
-    console.log("Error creating user:", error);
-  } else {
-    console.log("Successfully created user account with uid:", userData.uid);
-  }
-});
-////hides the loginform
+function registerUser(obj, cb) {
+  ref.createUser(obj, function(err) {
+    if (!err) {
+      ref.authWithPassword(obj, function (err, auth){
+        if (!err) {
+          cb(null, auth);
+        } else {
+          cb(err);
+        }
+      });
+    } else {
+      cb(err);
+    }
+  });
+}
   $('#loginform').toggleClass('hidden');
 /////new profile form will appear
   $('#createprofile').toggleClass('hidden');
@@ -175,3 +197,20 @@ $('#potentialapp').on('click', '#profileappbutton', function (event){
 //Because we converted our post to an object using .val() on line 3, we have access to the post's
 //author and title properties by calling by calling .author and .title respectively.
 
+//////sign user out
+//
+
+$('#profileapp').on('click', '#logout', function (){
+  ref.unauth();
+  location.reload(true);
+});
+
+$('#currentapp').on('click', '#logout', function (){
+  ref.unauth();
+  location.reload(true);
+});
+
+$('#potentialapp').on('click', '#logout', function (){
+  ref.unauth();
+  location.reload(true);
+});
