@@ -7,6 +7,7 @@
 
   //////for some reason not allowing me to create a Constructor object
   //with var ref = new Firebase(url); it says that Firebase is undefined
+
 $('#loginform').submit(function(event){
   var $loginForm = $(event.target),
       email      = $loginForm.find('[type="email"]').val(),
@@ -101,13 +102,16 @@ $.post(jsonurl, profiles, function(res){
 
 
 function addProfileToTable (uuid, info){
+
+  var profileurl = url + uuid + '/.json';
+
   var $profilephoto = $('<img src='+info.photourl+'></img>'),
       $profilename  = $('<td>'+info.name+'</td>'),
       $profilegender  = $('<td>'+info.gender+'</td>'),
       $profileemail = $('<td>'+info.email+'</td>'),
       $profiledescr  = $('<td>'+info.descr+'</td>');
 ///////append the info to the div and table
-
+      console.log(info.name);
 
       $('#imagecontainer').append($profilephoto);
       $('#profilename').append($profilename);
@@ -116,12 +120,13 @@ function addProfileToTable (uuid, info){
       $('#profiledescr').append($profiledescr);
 }
 
-
-
 ////////////////////These are the click handlers used for navigation
 //
 $('#mainpageapp').on('click', '#profileappbutton', function(event){
   event.preventDefault();
+
+  $.get(url +uuid+ '/.json',  addProfileToTable());
+
 
   $('#profileapp').toggleClass('hidden');
 
