@@ -2,28 +2,29 @@
 
 'use strict';
 /////global variables
-  var $loginform = $('#loginform');
-  var emaillogin    = $loginform.find('[type="email"]').val();
-  var pass       = $loginform.find('[type="password"]').val();
-  var url = 'https://datingappnssc8.firebaseio.com/';
+  var url = 'https://datingappnssc8.firebaseio.com/',
+      ref = new Firebase(url);
+
   //////for some reason not allowing me to create a Constructor object
   //with var ref = new Firebase(url); it says that Firebase is undefined
-$('#loginform').on('click', '#loginbutton', function (evt){
+
+////this will log the user in
+  $('#loginform').on('click', '#loginbutton', function (evt){
   evt.preventDefault();
-///this will be used to retrieve all of the likes or available profiles, when retrieving a list of items in Firebase.
-// child_added is triggered once for each existing child and then again every time a new child is added to the specified path.
-// The event callback is passed a snapshot containing the new child's data.
-//If we wanted to retrieve only the data on each new profile that matched we could use child_added:
-// Retrieve new posts as they are added to Firebase
-//ref.on("child_added", function(snapshot) {
-//  var newPost = snapshot.val();
-//  console.log("Author: " + newPost.author);
-//  console.log("Title: " + newPost.title);
-//});
-//
-//In this example the snapshot will contain an object with an individual blog post.
-//Because we converted our post to an object using .val() on line 3, we have access to the post's
-//author and title properties by calling by calling .author and .title respectively.
+  var unemail = $('#unemail').val();
+  var unpass  = $('#unpass').val();
+
+
+  ref.authWithPassword({
+  email: unemail,
+  password: unpass
+}, function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+  }
+});
 
 
  $('#loginform').toggleClass('hidden');
@@ -34,7 +35,19 @@ $('#loginform').on('click', '#loginbutton', function (evt){
 
 $('#loginform').on('click', '#registerbutton', function (event){
   event.preventDefault();
-
+  var unemail = $('#unemail').val();
+  var unpass  = $('#unpass').val();
+/////this will create the user
+ref.createUser({
+  email    : unemail,
+  password : unpass
+}, function(error, userData) {
+  if (error) {
+    console.log("Error creating user:", error);
+  } else {
+    console.log("Successfully created user account with uid:", userData.uid);
+  }
+});
 ////hides the loginform
   $('#loginform').toggleClass('hidden');
 /////new profile form will appear
@@ -147,4 +160,18 @@ $('#potentialapp').on('click', '#profileappbutton', function (event){
 
 
 
+///this will be used to retrieve all of the likes or available profiles, when retrieving a list of items in Firebase.
+// child_added is triggered once for each existing child and then again every time a new child is added to the specified path.
+// The event callback is passed a snapshot containing the new child's data.
+//If we wanted to retrieve only the data on each new profile that matched we could use child_added:
+// Retrieve new posts as they are added to Firebase
+//ref.on("child_added", function(snapshot) {
+//  var newPost = snapshot.val();
+//  console.log("Author: " + newPost.author);
+//  console.log("Title: " + newPost.title);
+//});
+//
+//In this example the snapshot will contain an object with an individual blog post.
+//Because we converted our post to an object using .val() on line 3, we have access to the post's
+//author and title properties by calling by calling .author and .title respectively.
 

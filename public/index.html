@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dating App</title>
     <link rel="stylesheet" href="./css/main.css">
+    <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
   </head>
   <body>
     <div>
       <form id="loginform" action="#">
-        <input type="email" placeholder="bob@gmail.com"></input>
-        <input type="password" placeholder="$Gfn36"></input>
-        <button type="button" id="loginbutton" value="login">Login</button>
-        <button type="submit" id="registerbutton" value="register">New? Input Info and Click Here</button>
+        <input type="email" id="unemail" placeholder="bob@gmail.com"></input>
+        <input type="password" id="unpass" placeholder="$Gfn36"></input>
+        <button type="button" id="loginbutton">Login</button>
+        <button type="button" id="registerbutton">New? Input Info and Click Here</button>
       </form>
     </div>
     <div id="createprofile" class="hidden">
