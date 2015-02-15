@@ -13,4 +13,4 @@ after_script:
   - cat ./coverage/PhantomJS*/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimate.js
 env:
   global:
-
+  - secure: NzDECZz09jgCPKZqK0iOh7R8RIMNK7ODIqek7a71JZdZd4m/9UfdsbM+K4GnI03v3WIv+lUMriwyCEz8Svf6RIdQeedAZTPZuHHEUlg90gcj9IshAFdkc5IR3zFWCd6jUFdKK4cFajHo291NI/Db9WXMKVbGSkiXWZNqc32/9SY=

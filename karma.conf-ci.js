@@ -4,15 +4,6 @@
 module.exports = function(config) {
   'use strict';
 
-  var sauceLaunchers = {
-    SL_IE10: {
-      base: 'SauceLabs',
-      platform: 'Windows 7',
-      browserName: 'internet explorer',
-      version: '10.0'
-    }
-  };
-
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -29,7 +20,6 @@ module.exports = function(config) {
       'public/js/**/*.js',
       'test/spec/**/*.test.js',
       'bower_components/jquery/dist/jquery.min.js',
-      'bower_components/async/lib/async.js',
       'bower_components/lodash/lodash.min.js'
     ],
 
@@ -54,7 +44,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage', 'coveralls', 'saucelabs'],
+    reporters: ['progress', 'coverage'],
 
 
     // web server port
@@ -81,7 +71,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS', 'Firefox', 'SL_IE10'],
+    browsers: ['PhantomJS', 'Firefox'],
 
 
     // Continuous Integration mode
