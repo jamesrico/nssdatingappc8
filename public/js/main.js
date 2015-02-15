@@ -49,6 +49,18 @@ $('#loginform').on('click', '#registerbutton', function (event){
   var unpass  = $('#unpass').val();
 /////this will create the user
 
+ref.createUser({
+  email    : unemail,
+  password : unpass
+}, function(error, userData) {
+  if (error) {
+    alert();
+    console.log("Error creating user:", error);
+  } else {
+    console.log("Successfully created user account with uid:", userData.uid);
+  }
+});
+
   $('#loginform').toggleClass('hidden');
 /////new profile form will appear
   $('#createprofile').toggleClass('hidden');
