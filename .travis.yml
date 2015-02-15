@@ -15,5 +15,5 @@ after_script:
 after_success:
   - npm install -g firebase-tools
   - if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ "$TRAVIS_BRANCH" == "master" ]]; then npm run deploy; fienv:
-  global:
+global:
   - secure: NzDECZz09jgCPKZqK0iOh7R8RIMNK7ODIqek7a71JZdZd4m/9UfdsbM+K4GnI03v3WIv+lUMriwyCEz8Svf6RIdQeedAZTPZuHHEUlg90gcj9IshAFdkc5IR3zFWCd6jUFdKK4cFajHo291NI/Db9WXMKVbGSkiXWZNqc32/9SY=
