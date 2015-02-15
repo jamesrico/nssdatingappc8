@@ -8,44 +8,35 @@
   //////for some reason not allowing me to create a Constructor object
   //with var ref = new Firebase(url); it says that Firebase is undefined
 
-$('#loginform').submit(function(event){
-  var $loginForm = $(event.target),
-      email      = $loginForm.find('[type="email"]').val(),
-      pass       = $loginForm.find('[type="password"]').val(),
-      data       = {email: email, password: pass};
 
-  event.preventDefault();
-
-  ref.authWithPassword(data, function(err, auth) {
-     if (err) {
-      $('.error').text(err);
-    } else {
-      location.reload(true);
-    }
-  });
-});
 
 ////this will log the user in
-  $('#loginform').on('click', '#loginbutton', function (evt){
+$('#loginform').on('click', '#loginbutton', function (evt){
   evt.preventDefault();
   var unemail = $('#unemail').val();
   var unpass  = $('#unpass').val();
 
-function loginUser(obj, cb) {
-  ref.createUser(obj, function(err) {
-    if (!err) {
-      ref.authWithPassword(obj, function (err, auth){
-        if (!err) {
-          cb(null, auth);
-        } else {
-          cb(err);
-        }
-      });
+  ref.authWithPassword({
+    email    : unemail,
+    password : unpass
+  }, function(error, authData) {
+    if (error) {
+      switch (error.code) {
+        case "INVALID_EMAIL":
+          console.log("The specified user account email is invalid.");
+        case "INVALID_PASSWORD":
+          console.log("The specified user account password is incorrect.");
+        case "INVALID_USER":
+          console.log("The specified user account does not exist.");
+          console.log("Error logging user in:", error);
+      }
     } else {
-      cb(err);
-    }
-  });
-}
+    console.log("Authenticated successfully with payload:", authData);
+  }
+});
+
+
+
  $('#loginform').toggleClass('hidden');
  $('#mainpageapp').toggleClass('hidden');
 })
@@ -57,25 +48,11 @@ $('#loginform').on('click', '#registerbutton', function (event){
   var unemail = $('#unemail').val();
   var unpass  = $('#unpass').val();
 /////this will create the user
-function registerUser(obj, cb) {
-  ref.createUser(obj, function(err) {
-    if (!err) {
-      ref.authWithPassword(obj, function (err, auth){
-        if (!err) {
-          cb(null, auth);
-        } else {
-          cb(err);
-        }
-      });
-    } else {
-      cb(err);
-    }
-  });
-}
+
   $('#loginform').toggleClass('hidden');
 /////new profile form will appear
   $('#createprofile').toggleClass('hidden');
-  })
+})
 
 
 $('#newprofileform').on('click', '#createbutton', function (event){
@@ -124,9 +101,6 @@ function addProfileToTable (uuid, info){
 //
 $('#mainpageapp').on('click', '#profileappbutton', function(event){
   event.preventDefault();
-
-  $.get(url +uuid+ '/.json',  addProfileToTable());
-
 
   $('#profileapp').toggleClass('hidden');
 
