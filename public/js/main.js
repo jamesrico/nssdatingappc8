@@ -29,18 +29,22 @@ $('#loginform').on('click', '#loginbutton', function (evt){
         case "INVALID_USER":
           console.log("The specified user account does not exist.");
           console.log("Error logging user in:", error);
+        ////callback this function to alert the user
+          invalidLogin();
       }
     } else {
     console.log("Authenticated successfully with payload:", authData);
-  }
+     $('#loginform').toggleClass('hidden');
+     $('#mainpageapp').toggleClass('hidden');
+
+    }
 });
-
-
-
- $('#loginform').toggleClass('hidden');
- $('#mainpageapp').toggleClass('hidden');
 })
-
+//////this function will display a message if invalid login
+function invalidLogin (){
+  var $invalidlogin = $('<div class="alert-box alert round">Invalid User</div>');
+  $('#loginform').append($invalidlogin);
+}
 ////the register button will need to hide login and display form
 
 $('#loginform').on('click', '#registerbutton', function (event){
@@ -48,18 +52,27 @@ $('#loginform').on('click', '#registerbutton', function (event){
   var unemail = $('#unemail').val();
   var unpass  = $('#unpass').val();
 /////this will create the user
-
 ref.createUser({
-  email    : unemail,
-  password : unpass
+  email: unemail,
+  password: unpass
 }, function(error, userData) {
   if (error) {
-    alert();
-    console.log("Error creating user:", error);
+    switch (error.code) {
+      case "EMAIL_TAKEN":
+        console.log("The new user account cannot be created because the email is already in use.");
+        break;
+      case "INVALID_EMAIL":
+        console.log("The specified email is not a valid email.");
+        break;
+      default:
+        console.log("Error creating user:", error);
+    }
   } else {
     console.log("Successfully created user account with uid:", userData.uid);
   }
 });
+
+  ref.authWithPassword();
 
   $('#loginform').toggleClass('hidden');
 /////new profile form will appear
@@ -88,7 +101,6 @@ $.post(jsonurl, profiles, function(res){
   $('#createprofile').toggleClass('hidden');
   $('#mainpageapp').toggleClass('hidden');
 })
-
 
 function addProfileToTable (uuid, info){
 
@@ -133,6 +145,12 @@ $('#mainpageapp').on('click', '#potentialappbutton', function(event){
   $('#potentialapp').toggleClass('hidden');
 
   $('#mainpageapp').toggleClass('hidden');
+})
+
+$('#profileapp').on('click','#createnewprofilebutton', function (event) {
+  event.preventDefault();
+  $('#createprofile').toggleClass('hidden');
+  $('#profileapp').toggleClass('hidden');
 })
 
 $('#profileapp').on('click', '#currentappbutton', function (event){
